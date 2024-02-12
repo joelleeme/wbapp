@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for, render_template_string
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def main():
+    message = ""
+    if request.method == "POST":
+        input_text = request.form.get("user_input", "")
+        message = f"You entered: {input_text}"
     return '''
-     <form action="/echo_user_input" method="POST">
-         <input name="user_input">
-         <input type="submit" value="Submit!">
-     </form>
-     '''
+    <h2>Enter some text and submit to see it echoed back</h2>
+    <form action="/" method="POST">
+        <input name="user_input" placeholder="Enter something here...">
+        <input type="submit" value="Submit!">
+    </form>
+    ''' + (f"<p><strong>{message}</strong></p>" if message else "")
 
-@app.route("/echo_user_input", methods=["POST"])
-def echo_input():
-    input_text = request.form.get("user_input", "")
-    return "You entered: " + input_text
+if __name__ == "__main__":
+    app.run(debug=True)
