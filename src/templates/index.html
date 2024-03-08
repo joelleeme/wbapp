@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Market Insights</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Real Estate Market Trends</h1>
+        <form id="yearRangeForm">
+            <label for="startYear">Start Year:</label>
+            <input type="number" id="startYear" name="startYear" required min="2001" max="2021" value="2001">
+            <label for="endYear">End Year:</label>
+            <input type="number" id="endYear" name="endYear" required min="2001" max="2021" value="2021">
+            <button type="submit">Analyze Trends</button>
+        </form>
+        <canvas id="realEstateChart"></canvas>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
